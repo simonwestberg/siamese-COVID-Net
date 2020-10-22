@@ -1,4 +1,7 @@
 import numpy as np
+from sklearn.metrics import confusion_matrix
+import tensorflow as tf
+from tensorflow import keras
 
 def get_validation_pairs(trials, X_covid_val, X_normal_val, X_pneumonia_val):
     """ 
@@ -90,3 +93,65 @@ def get_validation_pairs(trials, X_covid_val, X_normal_val, X_pneumonia_val):
         Y_val.append([1, 1, 0])
     
     return X_val, Y_val
+
+# Validation callback
+class Validation(keras.callbacks.Callback):
+    """A custom validation callback for 3-way one-shot validation used in the 
+    training of a siamese network."""
+    
+    def __init__(self, validation_data, tr_batches_per_epoch):
+        super(keras.callbacks.Callback, self).__init__()
+        self.validation_data = validation_data
+        self.X_val = self.validation_data[0]
+        self.Y_val = self.validation_data[1]
+        self.trials = len(self.Y_val)
+        self.val_accuracy = []
+        self.tr_batches_per_epoch = tr_batches_per_epoch
+        
+        self.max_val_acc = 0
+
+        self.confusion_matrices = []
+        self.confusion_matrices_perc = []
+
+    def on_epoch_end(self, epoch, logs=None):
+        self.validation()
+        accuracy = self.val_accuracy[-1]
+        print("\n3-way validation accuracy {} trials - epoch: {} - accuracy: {}".format(self.trials, epoch, accuracy))
+        print(self.confusion_matrices_perc[-1])
+        
+        # Save model if accuracy is larger than previous max validation accuracy
+        #if accuracy > self.max_val_acc:
+        #    self.max_val_acc = accuracy
+        #    self.model.save("Models/siameseNet")
+
+    def validation(self):
+        correct = 0
+        true_labels = []
+        predicted_labels = []
+        for i, triplet in enumerate(self.X_val):
+          
+            pair1 = triplet[0]
+            pair2 = triplet[1]
+            pair3 = triplet[2]
+
+            sim1 = self.model.predict(x=[[pair1[0]], [pair1[1]]])
+            sim2 = self.model.predict(x=[[pair2[0]], [pair2[1]]])
+            sim3 = self.model.predict(x=[[pair3[0]], [pair3[1]]])
+            
+            predict_triplet = [sim1, sim2, sim3]
+            Y_triplet = self.Y_val[i]
+            
+            prediction = np.argmin(predict_triplet)
+            truth = np.argmin(Y_triplet)
+            
+            true_labels.append(truth)
+            predicted_labels.append(prediction)
+
+            if prediction == truth:
+                correct += 1
+        
+        accuracy = correct / self.trials
+        conf = confusion_matrix(true_labels, predicted_labels)
+        self.val_accuracy.append(np.round(accuracy, 3))
+        self.confusion_matrices.append(conf)
+        self.confusion_matrices_perc.append(np.round(conf / np.sum(conf, axis=1), 2))
