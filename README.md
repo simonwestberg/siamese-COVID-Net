@@ -4,7 +4,7 @@ In this project we implement a siamese convolutional neural network based on the
 
 ## Architecture 
 
-The architecture of the COVID-Net is illustrated in the image below. 
+The architecture of COVID-Net is illustrated in the image below. It is primarily based on repeated use of the PEPX module and skip connections. ReLU activation is applied to all layers and downsampling is done by 2×2 max pooling.
 
 ![COVID-Net-architecure](/figures/COVID-Net-architecture.png)
 
