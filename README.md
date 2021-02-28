@@ -8,6 +8,8 @@ The architecture of COVID-Net is illustrated in the image below. It is primarily
 
 ![COVID-Net-architecure](/figures/COVID-Net-architecture.png)
 *The architecture of our implementation of COVID-Net. Used as a component in the siamese network.*
+\
+\
 
 Each PEPX (projection-expansion-projection-extension) module consists of a 
 
