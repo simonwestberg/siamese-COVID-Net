@@ -56,11 +56,20 @@ Confusion matrices for each network's test results can be seen below.
 
 ![](/figures/confusion-matrix-single-net.png)
 
-*Accuracies on the test set for the standalone COVID-Net. C: COVID-19, N: normal, P: pneumonia*
+*Accuracies on the test set for the single COVID-Net. C: COVID-19, N: normal, P: pneumonia*
 
 &nbsp;
 
 ### GradCAM analysis 
+
+To check if the network had learned relevant features during training we analyzed the trained single-net using GradCAM which creates heat maps illustrating the regions of an image 
+that were most relevant for the network's classification decision (note that GradCAM were only used on the single COVID-Net we trained, not on the siamese network). 
+
+When analyzing the heat maps, the results were quite mixed; in some cases, the predictions
+seemed to be based on relevant parts of the input images (i.e. the lung region),
+while in other cases, the predictions seemed to be entirely based on irrelevant artifacts around the image borders. To
+try to solve the issue of having predictions based on irrelevant artifacts, we conducted a second set of experiments on cropped versions of the images. 
+Cropping the images resolved the issue in some cases, while in others the GradCAM analysis was worse. See the below images for some GradCAM results.
 
 
 
