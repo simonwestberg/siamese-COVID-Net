@@ -9,6 +9,7 @@ The architecture of COVID-Net is illustrated in the image below. It is primarily
 ![COVID-Net-architecure](/figures/COVID-Net-architecture.png)
 *The architecture of our implementation of COVID-Net. Used as a component in the siamese network.*
 
+&nbsp;
 
 Each PEPX (projection-expansion-projection-extension) module consists of a 
 
@@ -22,8 +23,10 @@ Each PEPX (projection-expansion-projection-extension) module consists of a
 
 * Extension: a 1×1 convolution extending the number of channels once again
 
-![pepx](/figures/pepx.png)
+![pepx](/figures/pepx.png)  
 *The PEPX module used in COVID-Net*
+
+&nbsp;
 
 ## Siamese network
 
@@ -35,3 +38,7 @@ to determine the similarity of the two images. An illustration of a siamese netw
 ![siamese-net](/figures/siamese-arch.png)
 *Typical structure of a siamese network. The function d denotes a distance measure used to determine the similarity between the two images.*
 
+&nbsp;
+
+We used the scaled L1-norm as distance metric and each CNN consisted of our implementation of the COVID-Net. The networks were trained on the COVIDx data set and we used the scripts
+available in the [original COVID-Net repository](https://github.com/lindawangg/COVID-Net) for collecting the data. Please refer to the [report](report.pdf) for details on the training and testing procedures.  
