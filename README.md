@@ -21,12 +21,7 @@ Each PEPX (projection-expansion-projection-extension) module consists of a
 
 * Second-stage Projection: a 1×1 convolution reducing the channel dimension once again
 
-* Extension: a 1×1 convolution extending the number of channels once again
-
-![pepx](/figures/pepx.png)  
-*The PEPX module used in COVID-Net*
-
-&nbsp;
+* Extension: a 1×1 convolution extending the number of channels
 
 ## Siamese network
 
@@ -36,11 +31,11 @@ As two images are passed through the networks, their corresponding feature vecto
 to determine the similarity of the two images. An illustration of a siamese network can be seen below.
 
 ![siamese-net](/figures/siamese-arch.png)
-*Typical structure of a siamese network. The function d denotes a distance measure used to determine the similarity between the two images.*
+*Typical structure of a siamese network. The function d denotes a distance metric used to determine the similarity between the two images.*
 
 &nbsp;
 
-We used the scaled L1-norm as distance metric and each CNN consisted of our implementation of the COVID-Net. The networks were trained on the COVIDx data set and we used the scripts
+We used the scaled L1-norm as distance metric and each CNN consisted of our implementation of COVID-Net. The networks were trained on the COVIDx data set and we used the scripts
 available in the [original COVID-Net repository](https://github.com/lindawangg/COVID-Net) for collecting the data. Please refer to the [report](report.pdf) for details on the training and testing procedures.  
 
 ## Results 
@@ -63,19 +58,19 @@ Confusion matrices for each network's test results can be seen below.
 ### GradCAM analysis 
 
 To check if the network had learned relevant features during training we analyzed the trained single-net using GradCAM which creates heat maps illustrating the regions of an image 
-that were most relevant for the network's classification decision (note that GradCAM were only used on the single COVID-Net we trained, not on the siamese network). 
+that were most relevant for the network's classification decision (note that GradCAM was only used on the single COVID-Net we trained, not on the siamese network). 
 
 When analyzing the heat maps, the results were quite mixed; in some cases, the predictions
 seemed to be based on relevant parts of the input images (i.e. the lung region),
 while in other cases, the predictions seemed to be entirely based on irrelevant artifacts around the image borders. To
 try to solve the issue of having predictions based on irrelevant artifacts, we conducted a second set of experiments on cropped versions of the images. 
-Cropping the images resolved the issue in some cases, while in others the GradCAM analysis was worse. See the below images for some GradCAM results.
+Cropping the images resolved the issue in some cases, while in other cases the GradCAM analysis worsened. See the below images for some GradCAM results.
 
 ![](/figures/grad-cam1.png)
-*GradCAM results. We can see that the network trained on the original images has based its decision on relevant parts of the image, while the network trained on the cropped images has based its decision on more irrelevant part.*
+*GradCAM results. We can see that the network trained on the original images has based its decision on relevant parts of the image, while the network trained on cropped images has based its decision on more irrelevant parts.*
 
 &nbsp;
 
 ![](/figures/grad-cam2.png)
-*GradCAM results. We can see that the network trained on the original images has based its decision on entirely irrelevant image artifacts, while the network trained on the cropped images has based its decision on more relevant regions.*
+*GradCAM results. We can see that the network trained on the original images has based its decision on entirely irrelevant image artifacts, while the network trained on cropped images has based its decision on more relevant regions.*
 
