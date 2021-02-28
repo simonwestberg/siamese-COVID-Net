@@ -47,7 +47,20 @@ available in the [original COVID-Net repository](https://github.com/lindawangg/C
 
 We achieved an over-all test accuracy of **87%** for the siamese network and **81%** for the single COVID-Net, although the single-net performed better on COVID-19 images (note that the used data set was extremely unbalanced. Our test set contained only 31 COVID-19 images, but 885 images of normal lungs and 594 pneumonia images).
 
-Confusion matrices for each network can be seen below.
+Confusion matrices for each network's test results can be seen below.
+
+![](/figures/confusion-matrix-siamese.png)
+*Accuracies on the test set for the siamese network structure. C: COVID-19, N: normal, P: pneumonia*
+
+&nbsp;
+
+![](/figures/confusion-matrix-single-net.png)
+
+*Accuracies on the test set for the standalone COVID-Net. C: COVID-19, N: normal, P: pneumonia*
+
+&nbsp;
+
+### GradCAM analysis 
 
 
 
