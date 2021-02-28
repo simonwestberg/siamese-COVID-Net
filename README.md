@@ -42,3 +42,6 @@ to determine the similarity of the two images. An illustration of a siamese netw
 
 We used the scaled L1-norm as distance metric and each CNN consisted of our implementation of the COVID-Net. The networks were trained on the COVIDx data set and we used the scripts
 available in the [original COVID-Net repository](https://github.com/lindawangg/COVID-Net) for collecting the data. Please refer to the [report](report.pdf) for details on the training and testing procedures.  
+
+## Results 
+
