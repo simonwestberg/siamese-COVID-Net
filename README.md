@@ -71,5 +71,11 @@ while in other cases, the predictions seemed to be entirely based on irrelevant 
 try to solve the issue of having predictions based on irrelevant artifacts, we conducted a second set of experiments on cropped versions of the images. 
 Cropping the images resolved the issue in some cases, while in others the GradCAM analysis was worse. See the below images for some GradCAM results.
 
+![](/figures/grad-cam1.png)
+*GradCAM results. We can see that the network trained on the original images has based its decision on relevant parts of the image, while the network trained on the cropped images has based its decision on more irrelevant part.*
 
+&nbsp;
+
+![](/figures/grad-cam2.png)
+*GradCAM results. We can see that the network trained on the original images has based its decision on entirely irrelevant image artifacts, while the network trained on the cropped images has based its decision on more relevant regions.*
 
