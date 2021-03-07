@@ -57,7 +57,7 @@ Confusion matrices for each network's test results can be seen below.
 
 ### GradCAM analysis 
 
-To check if the network had learned relevant features during training we analyzed the trained single-net using GradCAM which creates heat maps illustrating the regions of an image 
+To check if the network had learned relevant features during training we analyzed the trained single-net using GradCAM, creating heat maps that illustrate the regions of an image 
 that were most relevant for the network's classification decision (note that GradCAM was only used on the single COVID-Net we trained, not on the siamese network). 
 
 When analyzing the heat maps, the results were quite mixed; in some cases, the predictions
